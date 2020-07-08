@@ -1,37 +1,25 @@
-/* body {
-    background-color: #293251;
-  }
+h1 {
+    text-align: center;
+}
   
-  header{
-    border-bottom: 4px solid crimson;
-  }
-  
-  .text-center {
-    color: #f4f9ff;
-  }
-  
-  .card-header{
-    padding-left: 2px;
-  }
-  
-  .form-control{
-  width: 87%;
-  margin-right: 2px;
-  }
-  
-  title {
-    color: #f4f9ff;
-  }
-  
-  .row {
+.card-header{
     padding-left: 10px;
-  }
+}
   
-  span {
+.form-control{
+    width: 87%;
+    margin-right: 2px;
+}
+  
+.row {
+    padding-left: 10px;
+}
+  
+span {
     display: inline-flex;
-  }
+}
   
-  .container {
+.container {
     background-color: #fff;
   
     display: block;
@@ -40,17 +28,17 @@
     border-radius: 10px;
     padding-bottom: 50px;
     width: 90%;
-  }
+}
   
-  .forecast-card{
+/* .forecast-card{
     background-color: royalblue;
     color: white;
-  }
+}
   
-  .app-title {
+.app-title {
     height: 50px;
     border-radius: 10px 10px 0 0;
-  }
+}
   
   .app-title p {
     text-align: center;
