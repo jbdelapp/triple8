@@ -1,27 +1,32 @@
 var apiKey = "d3247a9e8b9789c09ccfc53d466289d4";
-var searchCity = function(cityInput) {
-    fetch(
-        "http://api.openweathermap.org/data/2.5/weather?q="
-        + cityInput + "&appid=d3247a9e8b9789c09ccfc53d466289d4"
-      )
-        .then(function(response) {
-          return response.json();
-        }) .then(function(response) {
-            var iconCode = response.weather[0].icon;
+
+function currentWeather(){
+  navigator.geolocation.getCurrentPosition(function (position){
+    longitude = position.coords.longitude;
+    latitude = position.coords.latitude;
+
+    var queryURL = "https://api.openweathermap.org/data/2.5/weather?lat=" + latitude + "&lon=" + longitude + "&appid=" +  apiKey;
+
+    $.ajax({
+  url: queryURL,
+  method: "GET"
+})
+  // We store all of the retrieved data inside of an object called "response"
+  .then(function(response) {
+    var iconCode = response.weather[0].icon;
     
-            var iconurl = "http://openweathermap.org/img/w/" + iconCode + ".png";
-            $(".city").html("<h1> " + response.name + " </h1>");
-            $(".temp").text("Temperature: " + ((response.main.temp - 273.15) * 1.8 + 32).toFixed(0) + " °F");
-            $(".humidity").text("Humidity: " + response.main.humidity + " %");
-            $(".wind").text("Wind Speed: " + response.wind.speed + " MPH");
-            $("#wicon").attr("src", iconurl);
-        })
-  }
-  
-  document.getElementById("run-search").addEventListener("click", function(){
-  var userSearch = document.getElementById("get-weather").value
-    searchCity(userSearch);
+    var iconurl = "http://openweathermap.org/img/w/" + iconCode + ".png";
+    $(".city").html("<h1> " + response.name + " </h1>");
+    $(".temp").text("Temperature: " + ((response.main.temp - 273.15) * 1.8 + 32).toFixed(0) + " °F");
+    $(".humidity").text("Humidity: " + response.main.humidity + " %");
+    $(".wind").text("Wind Speed: " + response.wind.speed + " MPH");
+    $("#wicon").attr("src", iconurl);
   });
+
+  });
+};
+
+currentWeather();
 
 // 5 day weather forecast
 
@@ -92,3 +97,94 @@ function fiveDayForecast() {
 }
 
 fiveDayForecast();
+
+$("button").on("click", function(event) {
+    event.preventDefault();
+  
+  
+    var apiKey = "03e24d7d731fc83efc64f5aa4eb937c1";
+    var getWeather = $("#get-weather");
+    var city = getWeather.val().trim();
+    cities.push(city)
+    var message = document.querySelector(".invalid-message");
+     
+    console.log(getWeather);
+  
+    function storeCities(){
+      localStorage.setItem("cities", JSON.stringify(cities));
+    }
+  
+    if (city === null || city === "" ){
+      message.innerHTML = "Invalid input. Please try again!";
+    } else {
+      message.innerHTML = "";
+      renderCities();
+      storeCities();
+      getCities();
+    }
+    function renderCities() {
+      
+      $(".search-data").prepend("<p>" + city  + "</p");
+  
+}
+
+var queryURL =
+    "https://api.openweathermap.org/data/2.5/weather?lat=latitude&lon=longitude&q=" +
+    city + "&appid=" + apiKey;
+    
+$.ajax({
+    url: queryURL,
+    method: "GET"
+  })
+
+    .then(function(response) {
+      // Log the queryURL
+      console.log(queryURL);
+      // Log the resulting object
+      console.log(response);
+      // Transfer content to HTML
+      var iconCode = response.weather[0].icon;
+      var iconurl = "http://openweathermap.org/img/w/" + iconCode + ".png";
+      $(".city").html("<h1>" + response.name + "</h1>");
+      $(".temp").text(
+        "Temperature: " +
+          ((response.main.temp - 273.15) * 1.8 + 32).toFixed(0) +
+          " °F"
+      );
+      $(".humidity").text("Humidity: " + response.main.humidity + " %");
+      $(".wind").text("Wind Speed: " + response.wind.speed + " MPH");
+      $("#wicon").attr("src", iconurl);
+      // Converts the temp to Kelvin with the below formula
+
+      // Log the data in the console as well
+      console.log("Wind Speed: " + response.wind.speed);
+      console.log("Humidity: " + response.main.humidity);
+      console.log("Temperature (F): " + response.main.temp);
+});
+
+var fiveDayURL = "https://api.openweathermap.org/data/2.5/forecast?q=" + city + "&appid=" + apiKey;
+$.ajax({
+    url: fiveDayURL,
+    method: "GET"
+}).then(function(responseTwo) {
+// log the queryURL
+    console.log(fiveDayURL);
+// log the resulting object
+    console.log(responseTwo);
+    console.log(responseTwo.list[4].dt_txt);
+    console.log(responseTwo.list[4].main.temp);
+
+var icon1 = responseTwo.list[4].weather[0].icon;
+var icon1url = "http://openweathermap.org/img/w/" + icon1 + ".png";
+
+var icon2 = responseTwo.list[4].weather[0].icon;
+var icon2url = "http://openweathermap.org/img/w/" + icon2 + ".png";
+
+var icon3 = responseTwo.list[4].weather[0].icon;
+var icon2url = "http://openweathermap.org/img/w/" + icon3 + ".png";
+
+var icon4 = responseTwo.list[4].weather[0].icon;
+var icon2url = "http://openweathermap.org/img/w/" + icon4 + ".png";
+
+var icon5 = responseTwo.list[4].weather[0].icon;
+var icon2url = "http://openweathermap.org/img/w/" + icon5 + ".png";
