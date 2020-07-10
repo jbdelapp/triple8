@@ -1,5 +1,4 @@
 var apiKey = "d3247a9e8b9789c09ccfc53d466289d4";
-
 var currentWeather = function (){
   navigator.geolocation.getCurrentPosition(function (position){
     longitude = position.coords.longitude;
