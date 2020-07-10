@@ -25,6 +25,6 @@ THEN I am again presented with current and future conditions for that city
 https://rachelf0.github.io/triple8/
 
 ## Screenshot
-<img src="images/Screenshot-2020-07-10-13.48.33.png"/>
+![screenshot]<img src="https://github.com/rachelf0/triple8/blob/master/images/Screenshot%202020-07-10%2013.48.33.png"/>
 
 
